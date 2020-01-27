@@ -1,26 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+import { Switch, Route } from 'react-router-dom'
+import { Container } from 'semantic-ui-react'
+import MainView from './components/containers/MainView'
 
-function App() {
+const App = () => {
+  const [observations, setObservations] = useState([
+    {
+      name: 'Pigeon',
+      rarity: 'exremely rare',
+      notes: 'Found behind my room1',
+      date: new Date()
+    },
+    {
+      name: 'Pigeon',
+      rarity: 'exremely rare',
+      notes: 'Found behind my room2',
+      date: new Date()
+    },
+    {
+      name: 'Pigeon',
+      rarity: 'exremely rare',
+      notes: 'Found behind my room3',
+      date: new Date()
+    }
+  ])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Switch>
+      <Route exact path="/">
+        <MainView observations={observations} />
+      </Route>
+    </Switch>
+  )
 }
 
-export default App;
+export default App
