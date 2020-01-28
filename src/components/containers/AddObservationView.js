@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import AddObservationForm from '../presentationals/AddObservationForm'
+import { Header } from 'semantic-ui-react'
 
 const options = [
-  { key: 'common', text: 'common', value: 'common' },
+  { id: 'common', key: 'common', text: 'common', value: 'common' },
   { key: 'rare', text: 'rare', value: 'rare' },
   { key: 'extremely rare', text: 'extremely rare', value: 'extremely rare' }
 ]
@@ -67,6 +68,11 @@ const AddObservationView = ({ addObservation }) => {
 
   return (
     <div>
+      <Header
+        content='Add new Observation'
+        size='large'
+        style={{ textAlign: 'center' }}
+      />
       <AddObservationForm
         specie={specie}
         setSpecie={setSpecie}

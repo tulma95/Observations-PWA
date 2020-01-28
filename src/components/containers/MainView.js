@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid, Dropdown } from 'semantic-ui-react'
+import { Grid, Dropdown, Header, Container, Divider } from 'semantic-ui-react'
 import Observation from '../presentationals/Observation'
 import { bySpecie, byRarity, byDate } from '../../utils/sorters'
 
@@ -22,7 +22,9 @@ const MainView = ({ observations, setObservations }) => {
   ]
 
   return (
-    <div style={{ margin: '10px' }}>
+    <Container textAlign='center'>
+      <Header size='large' content='Observations' />
+      <Divider />
       <Dropdown
         text='Sort observations'
         options={sortOptions}
@@ -31,7 +33,7 @@ const MainView = ({ observations, setObservations }) => {
       <Grid columns={3} stackable centered>
         {observations.map(Observation)}
       </Grid>
-    </div>
+    </Container>
   )
 }
 

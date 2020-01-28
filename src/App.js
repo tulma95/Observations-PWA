@@ -24,7 +24,7 @@ const App = () => {
 
   const panes = [
     {
-      menuItem: 'view observations',
+      menuItem: 'View observations',
       render: () => (
         <Tab.Pane>
           <MainView
