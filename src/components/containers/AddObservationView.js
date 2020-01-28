@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import AddObservationForm from '../presentationals/AddObservationForm'
+import observationService from '../../services/observationService'
 
 const options = [
   { key: 'common', text: 'common', value: 'common' },
@@ -11,16 +12,46 @@ const AddObservationView = ({ addObservation }) => {
   const [specie, setSpecie] = useState('')
   const [notes, setNotes] = useState('')
   const [rarity, setRarity] = useState('')
+  const [message, setMessage] = useState({})
 
-  const handleSubmit = event => {
-    event.preventDefault()
+  const handleSubmit = () => {
     const newObservation = {
       specie,
       notes,
       rarity,
       date: new Date()
     }
-    addObservation(newObservation)
+    observationService.addObservation(newObservation)
+
+    const errors = validateForm()
+
+    if (errors.length === 0) {
+      resetFields()
+      addObservation(newObservation)
+      setMessage({
+        success: true,
+        content: 'Succesfully added new observation'
+      })
+    } else {
+      setMessage({
+        success: false,
+        content: errors
+      })
+    }
+  }
+
+  const validateForm = () => {
+    let errors = []
+    specie || errors.push("Specie can't be empty")
+    rarity || errors.push('You must choose rarity')
+    notes || errors.push("Notes can't be empty")
+    return errors
+  }
+
+  const resetFields = () => {
+    setSpecie('')
+    setNotes('')
+    setRarity('')
   }
 
   return (
@@ -34,6 +65,8 @@ const AddObservationView = ({ addObservation }) => {
         rarity={rarity}
         setRarity={setRarity}
         selections={options}
+        resetFields={resetFields}
+        message={message}
       />
     </div>
   )

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form } from 'semantic-ui-react'
+import { Form, Button, Message } from 'semantic-ui-react'
 
 const AddObservationForm = ({
   specie,
@@ -9,10 +9,12 @@ const AddObservationForm = ({
   selections,
   handleSubmit,
   rarity,
-  setRarity
+  setRarity,
+  resetFields,
+  message
 }) => {
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form success={message.success} error={!message.success}>
       <Form.Input
         label='Enter specie'
         type='text'
@@ -32,7 +34,15 @@ const AddObservationForm = ({
         value={notes}
         onChange={event => setNotes(event.target.value)}
       />
-      <Form.Button type='submit'>Add new</Form.Button>
+      {message.success ? (
+        <Message success content={message.content} />
+      ) : (
+        <Message error list={message.content} />
+      )}
+      <Button.Group>
+        <Form.Button onClick={handleSubmit}>Add new</Form.Button>
+        <Form.Button onClick={resetFields}>Reset</Form.Button>
+      </Button.Group>
     </Form>
   )
 }
