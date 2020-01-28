@@ -39,8 +39,9 @@ const AddObservationForm = ({
         value={notes}
         onChange={event => setNotes(event.target.value)}
       />
-      <Form.Input
-        type='File'
+      <input
+        data-cy='file'
+        type='file'
         onChange={event => resizeImage(event.target.files[0], setFile)}
       />
       {message.success ? (

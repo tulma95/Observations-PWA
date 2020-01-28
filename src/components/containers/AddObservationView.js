@@ -4,8 +4,13 @@ import { Header } from 'semantic-ui-react'
 
 const options = [
   { id: 'common', key: 'common', text: 'common', value: 'common' },
-  { key: 'rare', text: 'rare', value: 'rare' },
-  { key: 'extremely rare', text: 'extremely rare', value: 'extremely rare' }
+  { id: 'rare', key: 'rare', text: 'rare', value: 'rare' },
+  {
+    id: 'extremelyRare',
+    key: 'extremely rare',
+    text: 'extremely rare',
+    value: 'extremely rare'
+  }
 ]
 
 const AddObservationView = ({ addObservation }) => {
