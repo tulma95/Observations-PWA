@@ -18,6 +18,7 @@ const App = () => {
   }, [])
 
   const addObservation = newObservation => {
+    observationService.addObservation(newObservation)
     setObservations([newObservation, ...observations])
   }
 

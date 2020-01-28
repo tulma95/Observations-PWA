@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import AddObservationForm from '../presentationals/AddObservationForm'
-import observationService from '../../services/observationService'
 
 const options = [
   { key: 'common', text: 'common', value: 'common' },
@@ -12,20 +11,30 @@ const AddObservationView = ({ addObservation }) => {
   const [specie, setSpecie] = useState('')
   const [notes, setNotes] = useState('')
   const [rarity, setRarity] = useState('')
+  const [location, setLocation] = useState(undefined)
   const [message, setMessage] = useState({})
+  const [file, setFile] = useState()
 
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(position => {
+      const coords = {
+        longitude: position.coords.longitude.toFixed(4),
+        latitude: position.coords.latitude.toFixed(4)
+      }
+      setLocation(coords)
+    })
+  }, [])
   const handleSubmit = () => {
-    const newObservation = {
-      specie,
-      notes,
-      rarity,
-      date: new Date()
-    }
-    observationService.addObservation(newObservation)
-
     const errors = validateForm()
-
     if (errors.length === 0) {
+      const newObservation = {
+        specie,
+        notes,
+        rarity,
+        date: new Date(),
+        location,
+        image: file
+      }
       resetFields()
       addObservation(newObservation)
       setMessage({
@@ -52,6 +61,8 @@ const AddObservationView = ({ addObservation }) => {
     setSpecie('')
     setNotes('')
     setRarity('')
+    setLocation(undefined)
+    setFile()
   }
 
   return (
@@ -67,6 +78,7 @@ const AddObservationView = ({ addObservation }) => {
         selections={options}
         resetFields={resetFields}
         message={message}
+        setFile={setFile}
       />
     </div>
   )

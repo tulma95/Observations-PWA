@@ -1,5 +1,6 @@
 import React from 'react'
 import { Form, Button, Message } from 'semantic-ui-react'
+import resizeImage from '../../utils/imageResizer'
 
 const AddObservationForm = ({
   specie,
@@ -11,7 +12,8 @@ const AddObservationForm = ({
   rarity,
   setRarity,
   resetFields,
-  message
+  message,
+  setFile
 }) => {
   return (
     <Form success={message.success} error={!message.success}>
@@ -33,6 +35,10 @@ const AddObservationForm = ({
         label='notes'
         value={notes}
         onChange={event => setNotes(event.target.value)}
+      />
+      <Form.Input
+        type='file'
+        onChange={event => resizeImage(event.target.files[0], setFile)}
       />
       {message.success ? (
         <Message success content={message.content} />

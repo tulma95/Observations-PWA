@@ -24,9 +24,7 @@ const MainView = ({ observations, setObservations }) => {
   return (
     <div style={{ margin: '10px' }}>
       <Dropdown
-        placeholder='Sort list'
-        fluid
-        selection
+        text='Sort observations'
         options={sortOptions}
         style={{ margin: '10px' }}
       />
