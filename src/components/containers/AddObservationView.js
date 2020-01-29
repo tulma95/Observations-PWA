@@ -2,16 +2,14 @@ import React, { useState, useEffect } from 'react'
 import AddObservationForm from '../presentationals/AddObservationForm'
 import { Header } from 'semantic-ui-react'
 
-const options = [
-  { id: 'common', key: 'common', text: 'common', value: 'common' },
-  { id: 'rare', key: 'rare', text: 'rare', value: 'rare' },
-  {
-    id: 'extremelyRare',
-    key: 'extremely rare',
-    text: 'extremely rare',
-    value: 'extremely rare'
-  }
-]
+const option = rarity => ({
+  id: rarity,
+  key: rarity,
+  text: rarity,
+  value: rarity
+})
+
+const generateOptions = (...args) => args.map(option)
 
 const AddObservationView = ({ addObservation }) => {
   const [specie, setSpecie] = useState('')
@@ -20,6 +18,8 @@ const AddObservationView = ({ addObservation }) => {
   const [location, setLocation] = useState(undefined)
   const [message, setMessage] = useState({})
   const [file, setFile] = useState()
+
+  generateOptions('common', 'rare')
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(position => {
@@ -33,6 +33,7 @@ const AddObservationView = ({ addObservation }) => {
 
   const handleSubmit = () => {
     const errors = validateForm()
+
     if (errors.length === 0) {
       const newObservation = {
         specie,
@@ -42,6 +43,7 @@ const AddObservationView = ({ addObservation }) => {
         location,
         image: file
       }
+
       resetFields()
       addObservation(newObservation)
       setMessage({
@@ -87,7 +89,7 @@ const AddObservationView = ({ addObservation }) => {
         handleSubmit={handleSubmit}
         rarity={rarity}
         setRarity={setRarity}
-        selections={options}
+        selections={generateOptions('common', 'rare', 'extremely rare')}
         resetFields={resetFields}
         message={message}
         setFile={setFile}

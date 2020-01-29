@@ -37,7 +37,7 @@ describe('From index ', function() {
     cy.contains('Add observation').click()
     fillObservationFormAndSubmit(
       'Parrot',
-      'extremelyRare',
+      `'extremely rare`,
       'Can talk like a human'
     )
     cy.fixture('bird.jpg').then(fileContent => {
@@ -64,7 +64,7 @@ describe('From index ', function() {
     fillObservationFormAndSubmit('Duck', 'common', 'Found in river')
     fillObservationFormAndSubmit(
       'Parrot',
-      'extremelyRare',
+      `'extremely rare`,
       'Can talk like human'
     )
     fillObservationFormAndSubmit(
