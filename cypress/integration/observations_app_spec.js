@@ -1,7 +1,5 @@
 import { deleteDB } from 'idb'
 
-console.log(Cypress.env())
-
 function fillObservationForm(specie, rarity, notes) {
   cy.get('[data-cy=Specie]').type(specie)
   cy.get('[data-cy=Notes').type(notes)

@@ -24,8 +24,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "cypress:open": "cypress open",
-    "serve": "serve build &",
-    "cypress:ci": "CYPRESS_testPort=5000 cypress run"
+    "cypress:ci": "serve build&CYPRESS_testPort=5000 cypress run"
   },
   "eslintConfig": {
     "extends": "react-app"
