@@ -23,7 +23,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "serve": "serve build",
     "cypress:open": "cypress open",
+    "cypress:run": "cypress run --config video=false",
     "cypress:ci": "serve build&CYPRESS_testPort=5000 cypress run"
   },
   "eslintConfig": {
