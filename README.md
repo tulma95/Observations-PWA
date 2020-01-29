@@ -9,7 +9,7 @@ Application in Heroku:
 
 ## Tech stack
 
-The application is made with react. The main focus was to create a mobile first progressive web application. The Observations are saved into a client-side storage using IndexedDB. The application works in offline mode using serviceworkers so users can add new observations when internet connection is not available.
+The application is made with react. The main focus was to create a mobile first progressive web application. The Observations are saved into a client-side storage using IndexedDB. The application works in offline mode using serviceworkers so users can add new observations when internet connection is not available. End to end tests are made with Cypress. The tests cover all possible use cases expect coordinates.
 
 ## Experiences during development
 
