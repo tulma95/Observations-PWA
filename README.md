@@ -5,10 +5,53 @@ In observations application you can add new observations and show them your frie
 Application in Heroku:
 [Heroku link](https://observations-app.herokuapp.com/)
 
-## How to install
+## How to install and build
 
-1. Clone repository
+1. Clone repository and move to it:
 
 ```
-https://github.com/tulma95/Observations-PWA
+git clone https://github.com/tulma95/Observations-PWA
+cd Observations-PWA
 ```
+
+2. Install node modules with command:
+
+```
+npm install
+```
+
+3. build project with command:
+
+```
+npm run build
+```
+
+## Starting server
+
+To run application in `http://localhost:5000/` you have to first build the application and then run command:
+
+```
+npm run serve
+```
+
+## Cypress tests
+
+To run Cypress E2E tests you have to build the app and then open development server with command
+
+```
+npm start
+```
+
+After opening development server run command
+
+```
+npm run cypress:run
+```
+
+for CLI tests or
+
+```
+npm run cypress:open
+```
+
+for Cypress own graphical interface
