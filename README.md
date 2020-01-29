@@ -1,6 +1,8 @@
 # Observations app
 
-In observations application you can add new observations and show them your friends. Observations are saved locally so you don't need internet access for it to work.
+![](https://github.com/tulma95/Observations-PWA/workflows/Node.js%20CI/badge.svg)
+
+In observations application you can add new observations and show them to your friends. Observations are saved locally so you don't need internet access for it to work.
 
 Application in Heroku:
 [Heroku link](https://observations-app.herokuapp.com/)
