@@ -39,9 +39,10 @@ const AddObservationForm = ({
         value={notes}
         onChange={event => setNotes(event.target.value)}
       />
-      <input
+      <Form.Input
         data-cy='file'
         type='file'
+        accept='.jpeg,.png,.jpg'
         onChange={event => resizeImage(event.target.files[0], setFile)}
       />
       {message.success ? (
@@ -50,10 +51,13 @@ const AddObservationForm = ({
         <Message error list={message.content} />
       )}
       <Button.Group>
-        <Form.Button data-cy='Submit' onClick={handleSubmit}>
-          Add new
-        </Form.Button>
-        <Form.Button onClick={resetFields}>Reset</Form.Button>
+        <Form.Button
+          content='Add new'
+          positive
+          data-cy='Submit'
+          onClick={handleSubmit}
+        />
+        <Form.Button content='Reset' negative onClick={resetFields} />
       </Button.Group>
     </Form>
   )

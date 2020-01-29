@@ -30,6 +30,7 @@ const AddObservationView = ({ addObservation }) => {
       setLocation(coords)
     })
   }, [])
+
   const handleSubmit = () => {
     const errors = validateForm()
     if (errors.length === 0) {
