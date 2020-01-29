@@ -1,6 +1,6 @@
 {
   "env": {
-    "PORT": 3000
+    "testPort": 3000
   },
   "chromeWebSecurity": false
 }
