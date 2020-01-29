@@ -1,13 +1,12 @@
 import { deleteDB } from 'idb'
 
-function fillObservationFormAndSubmit(specie, rarity, notes) {
+function fillObservationForm(specie, rarity, notes) {
   cy.get('[data-cy=Specie]').type(specie)
   cy.get('[data-cy=Notes').type(notes)
   cy.get('[data-cy=Rarity]').click()
   cy.get(`[id=${rarity}]`)
     .trigger('mousemove')
     .click()
-  cy.get('[data-cy=Submit]').click()
 }
 
 describe('From index ', function() {
@@ -25,7 +24,7 @@ describe('From index ', function() {
   })
   it('New observation can be added', function() {
     cy.contains('Add observation').click()
-    fillObservationFormAndSubmit('pigeon', 'common', 'Small bird')
+    fillObservationForm('pigeon', 'common', 'Small bird')
     cy.get('[data-cy=Submit]').click()
     cy.contains('Succesfully added new observation')
     cy.contains('View observations').click()
@@ -35,11 +34,7 @@ describe('From index ', function() {
   })
   it('Observation with image can be added', function() {
     cy.contains('Add observation').click()
-    fillObservationFormAndSubmit(
-      'Parrot',
-      `'extremely rare`,
-      'Can talk like a human'
-    )
+    fillObservationForm('Parrot', `'extremely rare'`, 'Can talk like a human')
     cy.fixture('bird.jpg').then(fileContent => {
       cy.get('[data-cy=file]').upload({
         fileContent,
@@ -61,23 +56,22 @@ describe('From index ', function() {
   })
   it('Observation list can be sorted by rarity', function() {
     cy.contains('Add observation').click()
-    fillObservationFormAndSubmit('Duck', 'common', 'Found in river')
-    fillObservationFormAndSubmit(
-      'Parrot',
-      `'extremely rare`,
-      'Can talk like human'
-    )
-    fillObservationFormAndSubmit(
-      'Abyssinian Catbird',
-      'rare',
-      'Lives in dry forests'
-    )
+
+    fillObservationForm('Duck', 'common', 'Found in river')
+    cy.get('[data-cy=Submit]').click()
+
+    fillObservationForm('Parrot', `'extremely rare'`, 'Can talk like human')
+    cy.get('[data-cy=Submit]').click()
+
+    fillObservationForm('Abyssinian Catbird', 'rare', 'Lives in dry forests')
+    cy.get('[data-cy=Submit]').click()
 
     cy.contains('View observations').click()
     cy.get('[data-cy=filterDropdown]').click()
     cy.get(`[id='By Rarity']`)
       .trigger('mousemove')
       .click()
+
     cy.get('.card>.extra')
       .then($items => {
         return $items.text()

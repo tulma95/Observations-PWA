@@ -18,9 +18,6 @@ const AddObservationView = ({ addObservation }) => {
   const [location, setLocation] = useState(undefined)
   const [message, setMessage] = useState({})
   const [file, setFile] = useState()
-
-  generateOptions('common', 'rare')
-
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(position => {
       const coords = {
@@ -31,7 +28,7 @@ const AddObservationView = ({ addObservation }) => {
     })
   }, [])
 
-  const handleSubmit = () => {
+  const handleSubmit = event => {
     const errors = validateForm()
 
     if (errors.length === 0) {
@@ -44,12 +41,12 @@ const AddObservationView = ({ addObservation }) => {
         image: file
       }
 
-      resetFields()
       addObservation(newObservation)
       setMessage({
         success: true,
         content: 'Succesfully added new observation'
       })
+      resetFields()
     } else {
       setMessage({
         success: false,

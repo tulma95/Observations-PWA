@@ -16,7 +16,11 @@ const AddObservationForm = ({
   setFile
 }) => {
   return (
-    <Form success={message.success} error={!message.success}>
+    <Form
+      onSubmit={event => event.preventDefault()}
+      success={message.success}
+      error={!message.success}
+    >
       <Form.Input
         label='Enter specie'
         data-cy='Specie'
@@ -40,6 +44,7 @@ const AddObservationForm = ({
         onChange={event => setNotes(event.target.value)}
       />
       <input
+        style={{ margin: '0 0 10px 0' }}
         data-cy='file'
         type='file'
         accept='.jpeg,.png,.jpg'
@@ -50,6 +55,7 @@ const AddObservationForm = ({
       ) : (
         <Message error list={message.content} />
       )}
+
       <Button.Group>
         <Form.Button
           content='Add new'
