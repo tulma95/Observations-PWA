@@ -12,7 +12,7 @@ function fillObservationForm(specie, rarity, notes) {
 describe('From index ', function() {
   beforeEach(function() {
     deleteDB('Observations', {})
-    cy.visit('http://localhost:3000')
+    cy.visit(`http://localhost:${Cypress.env('testPort')}`)
   })
 
   it('front page can be opened', function() {

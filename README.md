@@ -6,3 +6,9 @@ Application in Heroku:
 [Heroku link](https://observations-app.herokuapp.com/)
 
 ## How to install
+
+1. Clone repository
+
+```
+https://github.com/tulma95/Observations-PWA
+```
