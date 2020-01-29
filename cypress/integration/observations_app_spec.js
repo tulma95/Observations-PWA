@@ -1,21 +1,18 @@
 import { deleteDB } from 'idb'
 
-function fillObservationForm(specie, rarity, notes) {
+function fillObservationFormAndSubmit(specie, rarity, notes) {
   cy.get('[data-cy=Specie]').type(specie)
   cy.get('[data-cy=Notes').type(notes)
   cy.get('[data-cy=Rarity]').click()
   cy.get(`[id=${rarity}]`)
     .trigger('mousemove')
     .click()
+  cy.get('[data-cy=Submit]').click()
 }
 
 describe('From index ', function() {
   beforeEach(function() {
-    deleteDB('Observations', {
-      blocked() {
-        console.log('bockas')
-      }
-    })
+    deleteDB('Observations', {})
     cy.visit('http://localhost:3000')
   })
 
@@ -28,7 +25,7 @@ describe('From index ', function() {
   })
   it('New observation can be added', function() {
     cy.contains('Add observation').click()
-    fillObservationForm('pigeon', 'common', 'Small bird')
+    fillObservationFormAndSubmit('pigeon', 'common', 'Small bird')
     cy.get('[data-cy=Submit]').click()
     cy.contains('Succesfully added new observation')
     cy.contains('View observations').click()
@@ -38,7 +35,11 @@ describe('From index ', function() {
   })
   it('Observation with image can be added', function() {
     cy.contains('Add observation').click()
-    fillObservationForm('Parrot', 'extremelyRare', 'Can talk like a human')
+    fillObservationFormAndSubmit(
+      'Parrot',
+      'extremelyRare',
+      'Can talk like a human'
+    )
     cy.fixture('bird.jpg').then(fileContent => {
       cy.get('[data-cy=file]').upload({
         fileContent,
@@ -51,11 +52,36 @@ describe('From index ', function() {
     cy.contains('View observation').click()
     cy.get('.image > img')
   })
-  it.only('Show errors and prevent submitting if no name, notes or rarity', function() {
+  it('Show errors and prevent submitting if no name, notes or rarity', function() {
     cy.contains('Add observation').click()
     cy.get('[data-cy=Submit]').click()
     cy.contains("Specie can't be empty")
     cy.contains('You must choose rarity')
     cy.contains("Notes can't be empty")
+  })
+  it('Observation list can be sorted by rarity', function() {
+    cy.contains('Add observation').click()
+    fillObservationFormAndSubmit('Duck', 'common', 'Found in river')
+    fillObservationFormAndSubmit(
+      'Parrot',
+      'extremelyRare',
+      'Can talk like human'
+    )
+    fillObservationFormAndSubmit(
+      'Abyssinian Catbird',
+      'rare',
+      'Lives in dry forests'
+    )
+
+    cy.contains('View observations').click()
+    cy.get('[data-cy=filterDropdown]').click()
+    cy.get(`[id='By Rarity']`)
+      .trigger('mousemove')
+      .click()
+    cy.get('.card>.extra')
+      .then($items => {
+        return $items.text()
+      })
+      .should('eq', 'extremely rarerarecommon')
   })
 })

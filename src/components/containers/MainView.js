@@ -16,6 +16,7 @@ const MainView = ({ observations, setObservations }) => {
       <Divider />
       {observations.length !== 0 && (
         <Dropdown
+          data-cy='filterDropdown'
           text='Sort observations'
           options={sortOptions}
           style={{ margin: '10px' }}
@@ -30,6 +31,7 @@ const MainView = ({ observations, setObservations }) => {
 
 const optionGenerator = (text, sortFunc, observations, observationSetter) => {
   return {
+    id: text,
     key: text,
     text,
     onClick: () => {

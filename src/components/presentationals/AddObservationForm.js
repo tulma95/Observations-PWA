@@ -39,7 +39,7 @@ const AddObservationForm = ({
         value={notes}
         onChange={event => setNotes(event.target.value)}
       />
-      <Form.Input
+      <input
         data-cy='file'
         type='file'
         accept='.jpeg,.png,.jpg'
